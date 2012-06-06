@@ -3,11 +3,13 @@ define([
 ,	'spec/models/card-spec'
 ,	'spec/collections/hand-spec'
 ,	'spec/collections/deck-spec'
+,	'spec/game-spec'
 	], 
 	function(	cardPropertiesSpec
 		, 		cardSpec
 		, 		handSpec
 		,		deckSpec
+		,		gameSpec
 		) {
 		return {
 			initialize: function(){
