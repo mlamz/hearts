@@ -1,6 +1,6 @@
 define(['../../../models/card-properties','../../../models/card'], 
   function(CardProperties, Card) {
-    describe("CardProperties", function() {
+    describe("Card", function() {
 
 		it("can be initialised with a rank and a suit", function() {
 			var card = new Card({ rank: CardProperties.rank.ace, suit: CardProperties.suit.hearts });
