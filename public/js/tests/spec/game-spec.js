@@ -10,7 +10,6 @@ define([
   		it("should be initialised with a deck", function(){
   			var game = new Game();
   			expect(game.deck).toBeDefined();
-  			expect(game.deck.models.length).toEqual(52);
   		});
 
   		it("should know what turn of the game it is", function(){
@@ -33,6 +32,14 @@ define([
   			expect(game.players[2].name).toEqual("Computer 2");
   			expect(game.players[3].name).toEqual("Computer 3");
   		});
+
+  		it("should assign a hand to each player from its deck", function(){
+  			var game = new Game();
+
+  			expect(game.players[0].hand).toBeDefined();
+  			expect(game.players[0].hand.models.length).toEqual(13);
+
+  		})
   	})
   }
 )
