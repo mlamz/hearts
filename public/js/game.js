@@ -3,11 +3,13 @@ define([
 ,	'deck'
 ,	'player'
 ,	'hand'
+,	'gameError'
 	], function( 
 		_
 ,		Deck
 ,		Player
 ,		Hand
+,		GameError
 		) {
 
 		var Game = function(){
@@ -22,7 +24,7 @@ define([
 			swapPhaseCompleted = _.all(that.players, function(player){ return player.swapPhaseCompleted },that);
 
 			if(!swapPhaseCompleted){
-				throw "all players must complete their swap phase";
+				throw new GameError("all players must complete their swap phase");
 			}
 			this.turn += 1;
 		}

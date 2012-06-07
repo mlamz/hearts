@@ -44,9 +44,10 @@ define([
   		});
 
       it("should throw an exception if we try and advance to turn 1 before each player has performed their swap phase", function(){
-        var game = new Game();
+        var game = new Game(),
+            expectedException = new GameError("all players must complete their swap phase");
 
-        expect(function() { game.playNextTurn(); }).toThrow("all players must complete their swap phase");
+        expect(function() { game.playNextTurn(); }).toThrow(expectedException);
         _.each(game.players, function(player){ player.swapPhaseCompleted = true; });
 
         game.playNextTurn();
