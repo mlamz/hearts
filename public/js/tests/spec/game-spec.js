@@ -104,11 +104,16 @@ define([
         aceOfClubs = new Card({suit: CardProperties.suit.clubs, rank: CardProperties.rank.ace });
 
         game.processPlayersGo(game.players[0], twoOfClubs);
-       // game.processPlayersGo(game.players[1], kingOfClubs);
-      //  game.processPlayersGo(game.players[2], queenOfClubs);
-        //game.processPlayersGo(game.players[3], aceOfClubs);
+        game.processPlayersGo(game.players[1], kingOfClubs);
+        game.processPlayersGo(game.players[2], queenOfClubs);
+        game.processPlayersGo(game.players[3], aceOfClubs);
 
-        expect(game.record).toEqual([[1, game.players[0], twoOfClubs]]);
+        expect(game.record).toEqual([
+          [1, game.players[0], twoOfClubs],
+          [1, game.players[1], kingOfClubs],
+          [1, game.players[2], queenOfClubs],
+          [1, game.players[3], aceOfClubs]
+          ]);
       });
   	})
   }

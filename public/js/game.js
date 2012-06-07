@@ -35,7 +35,7 @@ define([
 		Game.prototype.processPlayersGo = function(player, card){
 			var isTwoOfClubs = card.get('suit') === CardProperties.suit.clubs && card.get('rank') === CardProperties.rank.two;
 
-			if (!isTwoOfClubs){
+			if (!isTwoOfClubs && this.record.length === 0){
 				throw new GameError("first card played must be two of clubs");
 			}
 
