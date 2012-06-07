@@ -7,6 +7,10 @@ define(['underscore','hand'], function(_, Hand) {
 		Player.prototype.swap = function(player, cardsToSwap){
 			var that = this;
 
+			if (!(player instanceof Player)){
+				throw "type exception: check parameter type is player";
+			}
+
 			if (cardsToSwap.length != 3){
 				throw "exactly 3 cards must be specified in a swap";
 			}

@@ -70,7 +70,18 @@ define([
           expect(function() { 
             player.swap(player2,[player.hand.models[0],player.hand.models[1],player.hand.models[2],player.hand.models[3]]);
           }).toThrow(expectedException);
+      });
+
+      it ("should not allow a player to swap with an object that is not a player", function(){
+        var player = new Player("bob")
+          ,   deck = new Deck()
+          ,   expectedException = "type exception: check parameter type is player";
           
+          player.hand = new Hand(deck);
+        
+          expect(function() { 
+            player.swap([],[player.hand.models[0],player.hand.models[1],player.hand.models[2]]);
+          }).toThrow(expectedException);
       });
 
   	})
