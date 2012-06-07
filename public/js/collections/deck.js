@@ -1,4 +1,4 @@
-define(['backbone', '../models/card-properties', '../models/card'], 
+define(['backbone', 'cardProperties', '../models/card'], 
 	function(Backbone, CardProperties, Card) {
     	var Deck = Backbone.Collection.extend({
     		model: Card,

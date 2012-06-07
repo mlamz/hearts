@@ -1,6 +1,6 @@
 define([	
 	'underscore'
-,	'../../../models/card-properties'
+,	'cardProperties'
 ,	'../../../models/card'
 ,	'../../../collections/hand'
 ,	'../../../collections/deck'

@@ -4,12 +4,14 @@ define([
 ,	'player'
 ,	'hand'
 ,	'gameError'
+,	'cardProperties'
 	], function( 
 		_
 ,		Deck
 ,		Player
 ,		Hand
 ,		GameError
+,		CardProperties
 		) {
 
 		var Game = function(){
@@ -27,6 +29,14 @@ define([
 				throw new GameError("all players must complete their swap phase");
 			}
 			this.turn += 1;
+		}
+
+		Game.prototype.processPlayersGo = function(player, card){
+			var isTwoOfClubs = card.get('suit') === CardProperties.suit.clubs && card.get('rank') === CardProperties.rank.two;
+
+			if (!isTwoOfClubs){
+				throw new GameError("first card played must be two of clubs");
+			}
 		}
 
 		function getPlayers(deck){
