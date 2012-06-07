@@ -1,7 +1,7 @@
 define([
 	'underscore'
 ,	'cardProperties'
-,	'../../../models/card'
+,	'card'
 ,	'../../../collections/deck'
 ], 
   function(_, CardProperties, Card, Deck) {

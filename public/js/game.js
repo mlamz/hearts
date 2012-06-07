@@ -5,6 +5,7 @@ define([
 ,	'hand'
 ,	'gameError'
 ,	'cardProperties'
+,	'card'
 	], function( 
 		_
 ,		Deck
@@ -12,6 +13,7 @@ define([
 ,		Hand
 ,		GameError
 ,		CardProperties
+,		Card
 		) {
 
 		var Game = function(){
@@ -33,9 +35,9 @@ define([
 		}
 
 		Game.prototype.processPlayersGo = function(player, card){
-			var isTwoOfClubs = card.get('suit') === CardProperties.suit.clubs && card.get('rank') === CardProperties.rank.two;
+			var twoOfClubs = new Card({suit: CardProperties.suit.clubs, rank: CardProperties.rank.two});
 
-			if (!isTwoOfClubs && this.record.length === 0){
+			if (!card.equals(twoOfClubs) && this.record.length === 0){
 				throw new GameError("first card played must be two of clubs");
 			}
 

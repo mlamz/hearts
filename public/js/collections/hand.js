@@ -1,4 +1,4 @@
-define(['backbone', '../models/card'], 
+define(['backbone', 'card'], 
 	function(Backbone,  Card) {
     	var Hand = Backbone.Collection.extend({
     		model: Card,
