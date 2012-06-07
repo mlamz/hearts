@@ -11,11 +11,12 @@ define([
   			var player = new Player("bob");
   			expect(player.name).toEqual("bob");
   		});
-  		it("should allow a player to swap three cards with each other", function(){
-  			var player = new Player("bob");
-  			var player2 = new Player("steve");
 
-  			var deck = new Deck();
+  		it("should allow a player to swap three cards with each other", function(){
+  			var player = new Player("bob")
+          ,   player2 = new Player("steve")
+          ,   deck = new Deck();
+
   			player.hand = new Hand(deck);
   			player2.hand = new Hand(deck);
 
@@ -44,6 +45,33 @@ define([
         expect(card6.get('rank')).toEqual(player.hand.models[12].get('rank'));
 
   		});
+
+      it("should not allow a player to swap less than or more than three cards with each other", function(){
+          var player = new Player("bob")
+          ,   player2 = new Player("steve")
+          ,   deck = new Deck()
+          ,   expectedException = "exactly 3 cards must be specified in a swap";
+          
+          player.hand = new Hand(deck);
+          player2.hand = new Hand(deck);
+        
+          expect(function() { 
+            player.swap(player2,[]);
+          }).toThrow(expectedException);
+
+          expect(function() { 
+            player.swap(player2,[player.hand.models[0]]);
+          }).toThrow(expectedException);
+
+          expect(function() { 
+            player.swap(player2,[player.hand.models[0],player.hand.models[1]]);
+          }).toThrow(expectedException);
+
+          expect(function() { 
+            player.swap(player2,[player.hand.models[0],player.hand.models[1],player.hand.models[2],player.hand.models[3]]);
+          }).toThrow(expectedException);
+          
+      });
 
   	})
   }

@@ -4,9 +4,14 @@ define(['underscore','hand'], function(_, Hand) {
 			this.swapPhaseCompleted = false;
 		};
 
-		Player.prototype.swap = function(player, itemsToBeSwapped){
+		Player.prototype.swap = function(player, cardsToSwap){
 			var that = this;
-			_.each(itemsToBeSwapped, function(card){
+
+			if (cardsToSwap.length != 3){
+				throw "exactly 3 cards must be specified in a swap";
+			}
+
+			_.each(cardsToSwap, function(card){
 				player.hand.add(card);
 				that.hand.remove(card);
 				that.swapPhaseCompleted = true;
