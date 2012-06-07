@@ -18,6 +18,7 @@ define([
 			this.deck = new Deck();
 			this.turn = 0;
 			this.players = getPlayers(this.deck);
+			this.record = [];
 		};
 
 		Game.prototype.playNextTurn = function(){
@@ -37,6 +38,8 @@ define([
 			if (!isTwoOfClubs){
 				throw new GameError("first card played must be two of clubs");
 			}
+
+			this.record.push([this.turn, player, card]);
 		}
 
 		function getPlayers(deck){

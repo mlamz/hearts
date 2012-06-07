@@ -56,11 +56,13 @@ define([
       });
 
       it("should accept the two of clubs as the first card played in turn 1", function(){
-        var game = new Game();
+        var game = new Game()
+        ,   twoOfClubs;
+
         _.each(game.players, function(player){ player.swapPhaseCompleted = true; });
         game.turn = 1;
 
-        var twoOfClubs = new Card({suit: CardProperties.suit.clubs, rank: CardProperties.rank.two });
+        twoOfClubs = new Card({suit: CardProperties.suit.clubs, rank: CardProperties.rank.two });
         game.processPlayersGo(game.players[0], twoOfClubs);
       });
 
@@ -69,9 +71,10 @@ define([
         deck = new Deck(),
         otherCards,
         expectedException = new GameError("first card played must be two of clubs");
+
         _.each(game.players, function(player){ player.swapPhaseCompleted = true; });
         game.turn = 1;
-        
+
         otherCards = _.filter(deck.models, 
           function(card){ 
             return !(card.get('suit') === CardProperties.suit.clubs && card.get('rank') === CardProperties.rank.two)
@@ -83,6 +86,29 @@ define([
           expect(function() { game.processPlayersGo(game.players[0], card); }).toThrow(expectedException);
         });
 
+      });
+
+      it("should record the turn, player and card for every go", function(){
+        var game = new Game()
+        ,   twoOfClubs
+        ,   kingOfClubs
+        ,   queenOfClubs
+        ,   aceOfClubs;
+
+        _.each(game.players, function(player){ player.swapPhaseCompleted = true; });
+        game.turn = 1;
+
+        twoOfClubs = new Card({suit: CardProperties.suit.clubs, rank: CardProperties.rank.two });
+        kingOfClubs = new Card({suit: CardProperties.suit.clubs, rank: CardProperties.rank.king });
+        queenOfClubs = new Card({suit: CardProperties.suit.clubs, rank: CardProperties.rank.queen });
+        aceOfClubs = new Card({suit: CardProperties.suit.clubs, rank: CardProperties.rank.ace });
+
+        game.processPlayersGo(game.players[0], twoOfClubs);
+       // game.processPlayersGo(game.players[1], kingOfClubs);
+      //  game.processPlayersGo(game.players[2], queenOfClubs);
+        //game.processPlayersGo(game.players[3], aceOfClubs);
+
+        expect(game.record).toEqual([[1, game.players[0], twoOfClubs]]);
       });
   	})
   }
