@@ -8,11 +8,11 @@ define(['underscore','hand'], function(_, Hand) {
 			var that = this;
 
 			if (!(player instanceof Player)){
-				throw "type exception: check parameter type is player";
+				throw new TypeError("type exception: check parameter type is player");
 			}
 
 			if (cardsToSwap.length != 3){
-				throw "exactly 3 cards must be specified in a swap";
+				throw new RangeError("exactly 3 cards must be specified in a swap");
 			}
 
 			_.each(cardsToSwap, function(card){

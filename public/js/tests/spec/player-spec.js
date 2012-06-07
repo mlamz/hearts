@@ -50,7 +50,7 @@ define([
           var player = new Player("bob")
           ,   player2 = new Player("steve")
           ,   deck = new Deck()
-          ,   expectedException = "exactly 3 cards must be specified in a swap";
+          ,   expectedException = new RangeError("exactly 3 cards must be specified in a swap");
           
           player.hand = new Hand(deck);
           player2.hand = new Hand(deck);
@@ -75,7 +75,7 @@ define([
       it ("should not allow a player to swap with an object that is not a player", function(){
         var player = new Player("bob")
           ,   deck = new Deck()
-          ,   expectedException = "type exception: check parameter type is player";
+          ,   expectedException = new TypeError("type exception: check parameter type is player");
           
           player.hand = new Hand(deck);
         
