@@ -5,7 +5,7 @@ define(['backbone'],
     		}
     	});
     	Card.prototype.equals = function(otherCard){
-    		if (this.get('suit') == otherCard.get('suit') && this.get('rank') == otherCard.get('rank')){
+    		if (this.get('suit') === otherCard.get('suit') && this.get('rank') === otherCard.get('rank')){
     			return true;
     		};
 
