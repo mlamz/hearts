@@ -4,8 +4,9 @@ define([
 ,	'../../collections/hand'
 ,	'../../collections/deck'
 ,	'../../game'
+, 'gameError'
 ], 
-  function(_, Card, Hand, Deck, Game) {
+  function(_, Card, Hand, Deck, Game, GameError) {
   	describe("Game", function(){
   		it("should be initialised with a deck", function(){
   			var game = new Game();
@@ -50,9 +51,9 @@ define([
 
         game.playNextTurn();
         expect(game.turn).toEqual(1);
-        
-
       });
+
+
   	})
   }
 )

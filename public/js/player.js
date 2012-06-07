@@ -1,4 +1,4 @@
-define(['underscore','hand'], function(_, Hand) {
+define(['underscore','hand','gameError'], function(_, Hand, GameError) {
 		var Player = function(name){
 			this.name = name;
 			this.swapPhaseCompleted = false;
@@ -13,6 +13,10 @@ define(['underscore','hand'], function(_, Hand) {
 
 			if (cardsToSwap.length != 3){
 				throw new RangeError("exactly 3 cards must be specified in a swap");
+			}
+
+			if (that.swapPhaseCompleted){
+				throw new GameError("a player cannot swap multiple times");
 			}
 
 			_.each(cardsToSwap, function(card){

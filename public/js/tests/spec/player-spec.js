@@ -4,8 +4,9 @@ define([
 , '../../collections/hand'
 ,	'player'
 ,	'deck'
+, 'gameError'
 ], 
-  function(_, Card, Hand, Player, Deck) {
+  function(_, Card, Hand, Player, Deck, GameError) {
   	describe("Player", function(){
   		it("should be initialised with a name", function(){
   			var player = new Player("bob");
@@ -82,6 +83,22 @@ define([
           expect(function() { 
             player.swap([],[player.hand.models[0],player.hand.models[1],player.hand.models[2]]);
           }).toThrow(expectedException);
+      });
+
+      it ("should not allow a player to swap more than once", function(){
+        var player = new Player("bob")
+          ,   player2 = new Player("steve")
+          ,   deck = new Deck()
+          ,   expectedException = new GameError("a player cannot swap multiple times");
+
+        player.hand = new Hand(deck);
+        player2.hand = new Hand(deck);
+
+        player.swap(player2,[player.hand.models[0],player.hand.models[1],player.hand.models[2]]);
+        
+        expect(function() { 
+            player.swap(player2,[player.hand.models[0],player.hand.models[1],player.hand.models[2]]);
+        }).toThrow(expectedException);
       });
 
   	})
