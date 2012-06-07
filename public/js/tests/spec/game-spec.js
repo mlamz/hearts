@@ -14,6 +14,7 @@ define([
 
   		it("should know what turn of the game it is", function(){
   			var game = new Game();
+        _.each(game.players, function(player){ player.swapPhaseCompleted = true; });
   			expect(game.turn).toEqual(0);
   			
   			game.playNextTurn();
@@ -39,7 +40,19 @@ define([
   			expect(game.players[0].hand).toBeDefined();
   			expect(game.players[0].hand.models.length).toEqual(13);
 
-  		})
+  		});
+
+      it("should throw an exception if we try and advance to turn 1 before each player has performed their swap phase", function(){
+        var game = new Game();
+
+        expect(function() { game.playNextTurn(); }).toThrow("all players must complete their swap phase");
+        _.each(game.players, function(player){ player.swapPhaseCompleted = true; });
+
+        game.playNextTurn();
+        expect(game.turn).toEqual(1);
+        
+
+      });
   	})
   }
 )

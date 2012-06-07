@@ -17,6 +17,13 @@ define([
 		};
 
 		Game.prototype.playNextTurn = function(){
+			var swapPhaseCompleted, that = this;
+			
+			swapPhaseCompleted = _.all(that.players, function(player){ return player.swapPhaseCompleted },that);
+
+			if(!swapPhaseCompleted){
+				throw "all players must complete their swap phase";
+			}
 			this.turn += 1;
 		}
 
