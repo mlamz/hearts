@@ -40,6 +40,18 @@ define([
 			}
 
 			this.record.push([this.turn, player, card]);
+			if(this.record.length % 4 === 0 && this.record.length > 0){
+				_.each(this.players, function(player) { return player.winnerOfLastRound = false; });
+				determineWinnerOfTurn(this.record);
+			}
+		}
+
+		function determineWinnerOfTurn(record){
+			var cardsPlayedInTurn, winningPlayerGo;
+			cardsPlayedInTurn = record.slice(record.length - 4);
+			cardsPlayedInTurn = _.sortBy(cardsPlayedInTurn, function(playerGo){ return playerGo[2].get('rank'); });
+			winningPlayerGo = _.last(cardsPlayedInTurn);
+			winningPlayerGo[1].winnerOfLastRound = true;
 		}
 
 		function getPlayers(deck){

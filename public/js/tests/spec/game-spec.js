@@ -115,6 +115,32 @@ define([
           [1, game.players[3], aceOfClubs]
           ]);
       });
+
+      it("a player wins a turn if he places a card of the highest rank of the same suit as the start card", function(){
+        var game = new Game()
+        ,   twoOfClubs
+        ,   kingOfClubs
+        ,   queenOfClubs
+        ,   aceOfClubs;
+
+        _.each(game.players, function(player){ player.swapPhaseCompleted = true; });
+        game.turn = 1;
+
+        twoOfClubs = new Card({suit: CardProperties.suit.clubs, rank: CardProperties.rank.two });
+        kingOfClubs = new Card({suit: CardProperties.suit.clubs, rank: CardProperties.rank.king });
+        queenOfClubs = new Card({suit: CardProperties.suit.clubs, rank: CardProperties.rank.queen });
+        aceOfClubs = new Card({suit: CardProperties.suit.clubs, rank: CardProperties.rank.ace });
+
+        game.processPlayersGo(game.players[0], twoOfClubs);
+        game.processPlayersGo(game.players[1], aceOfClubs);
+        game.processPlayersGo(game.players[2], queenOfClubs);
+        game.processPlayersGo(game.players[3], kingOfClubs);
+
+        expect(game.players[3].winnerOfLastRound).toBe(false);
+        expect(game.players[0].winnerOfLastRound).toBe(false);
+        expect(game.players[1].winnerOfLastRound).toBe(true);
+        expect(game.players[2].winnerOfLastRound).toBe(false);
+      });
   	})
   }
 )
