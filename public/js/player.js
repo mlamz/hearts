@@ -3,6 +3,7 @@ define(['underscore','hand','gameError'], function(_, Hand, GameError) {
 			this.name = name;
 			this.swapPhaseCompleted = false;
 			this.winnerOfLastRound = false;
+			this.score = 0;
 		};
 
 		Player.prototype.swap = function(player, cardsToSwap){

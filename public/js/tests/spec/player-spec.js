@@ -1,6 +1,6 @@
 define([	
 	'underscore'
-,	'../../models/card'
+,	'card'
 , '../../collections/hand'
 ,	'player'
 ,	'deck'
@@ -99,6 +99,12 @@ define([
         expect(function() { 
             player.swap(player2,[player.hand.models[0],player.hand.models[1],player.hand.models[2]]);
         }).toThrow(expectedException);
+      });
+
+      it("should be initialised with a score of 0", function(){
+        var player = new Player("George");
+
+        expect(player.score).toEqual(0);
       });
 
   	})
