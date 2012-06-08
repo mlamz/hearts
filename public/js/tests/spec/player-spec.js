@@ -9,13 +9,13 @@ define([
   function(_, Card, Hand, Player, Deck, GameError) {
   	describe("Player", function(){
   		it("should be initialised with a name", function(){
-  			var player = new Player("bob");
+  			var player = new Player("bob", 1);
   			expect(player.name).toEqual("bob");
   		});
 
   		it("should allow a player to swap three cards with each other", function(){
-  			var player = new Player("bob")
-          ,   player2 = new Player("steve")
+  			var player = new Player("bob", 1)
+          ,   player2 = new Player("steve", 2)
           ,   deck = new Deck();
 
   			player.hand = new Hand(deck);
@@ -48,8 +48,8 @@ define([
   		});
 
       it("should not allow a player to swap less than or more than three cards with each other", function(){
-          var player = new Player("bob")
-          ,   player2 = new Player("steve")
+          var player = new Player("bob", 1)
+          ,   player2 = new Player("steve", 2)
           ,   deck = new Deck()
           ,   expectedException = new RangeError("exactly 3 cards must be specified in a swap");
           
@@ -74,7 +74,7 @@ define([
       });
 
       it ("should not allow a player to swap with an object that is not a player", function(){
-        var player = new Player("bob")
+        var player = new Player("bob", 1)
           ,   deck = new Deck()
           ,   expectedException = new TypeError("type exception: check parameter type is player");
           
@@ -86,8 +86,8 @@ define([
       });
 
       it ("should not allow a player to swap more than once", function(){
-        var player = new Player("bob")
-          ,   player2 = new Player("steve")
+        var player = new Player("bob", 1)
+          ,   player2 = new Player("steve", 2)
           ,   deck = new Deck()
           ,   expectedException = new GameError("a player cannot swap multiple times");
 
@@ -102,7 +102,7 @@ define([
       });
 
       it("should be initialised with a score of 0", function(){
-        var player = new Player("George");
+        var player = new Player("George", 1);
 
         expect(player.score).toEqual(0);
       });

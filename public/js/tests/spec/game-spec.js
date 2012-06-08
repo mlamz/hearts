@@ -193,6 +193,15 @@ define([
         expect(game.players[2].score).toEqual(26);
         expect(game.players[3].score).toEqual(26);
       });
+
+      it("should number players from 1 to 4", function(){
+        var game = new Game();
+
+        expect(game.players[0].number).toEqual(1);
+        expect(game.players[1].number).toEqual(2);
+        expect(game.players[2].number).toEqual(3);
+        expect(game.players[3].number).toEqual(4);
+      })
   	})
   }
 )

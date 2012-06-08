@@ -109,10 +109,10 @@ define([
 
 		function getPlayers(deck){
 			var players = [
-				new Player("Player 1")
-			, 	new Player("Computer 1")
-			, 	new Player("Computer 2")
-			, 	new Player("Computer 3")
+				new Player("Player 1", 1)
+			, 	new Player("Computer 1", 2)
+			, 	new Player("Computer 2", 3)
+			, 	new Player("Computer 3", 4)
 			];
 
 			_.each(players, function(player){ 
