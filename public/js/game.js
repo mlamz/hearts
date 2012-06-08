@@ -35,25 +35,52 @@ define([
 		}
 
 		Game.prototype.processPlayersGo = function(player, card){
-			var twoOfClubs = new Card({suit: CardProperties.suit.clubs, rank: CardProperties.rank.two});
+			var twoOfClubs
+			, 	cardsPlayedInTurn
+			,	winningPlayer;
 
-			if (!card.equals(twoOfClubs) && this.record.length === 0){
+			twoOfClubs = new Card({suit: CardProperties.suit.clubs, rank: CardProperties.rank.two});
+
+			if (!card.equals(twoOfClubs) && this.record.length === 0 && this.turn === 1){
 				throw new GameError("first card played must be two of clubs");
 			}
 
 			this.record.push([this.turn, player, card]);
 			if(this.record.length % 4 === 0 && this.record.length > 0){
+				cardsPlayedInTurn = this.record.slice(this.record.length - 4);
+
 				_.each(this.players, function(player) { return player.winnerOfLastRound = false; });
-				determineWinnerOfTurn(this.record);
+				winningPlayer = determineWinnerOfTurn(cardsPlayedInTurn);
+				winningPlayer.score += determineScoreOfTurn(cardsPlayedInTurn);
 			}
 		}
 
-		function determineWinnerOfTurn(record){
-			var cardsPlayedInTurn, winningPlayerGo;
-			cardsPlayedInTurn = record.slice(record.length - 4);
-			cardsPlayedInTurn = _.sortBy(cardsPlayedInTurn, function(playerGo){ return playerGo[2].rank; });
-			winningPlayerGo = _.last(cardsPlayedInTurn);
-			winningPlayerGo[1].winnerOfLastRound = true;
+		function determineWinnerOfTurn(cardsPlayedInTurn){
+			var startCardSuit
+			, 	cardsPlayedOfTheSameSuit
+			,	sortedCards
+			,	winningCardPlayedInTurn
+			,	winningPlayer;
+			
+			startCardSuit = cardsPlayedInTurn[0][2].suit;
+			cardsPlayedOfTheSameSuit = _.filter(cardsPlayedInTurn, function(card){ return card[2].suit == startCardSuit; });
+
+			sortedCards = _.sortBy(cardsPlayedOfTheSameSuit, function(card){ return card[2].rank; });
+
+			winningCardPlayedInTurn = sortedCards[cardsPlayedOfTheSameSuit.length - 1];
+			
+			winningPlayer = winningCardPlayedInTurn[1];
+			winningPlayer.winnerOfLastRound = true;
+			return winningPlayer;
+		}
+
+		function determineScoreOfTurn(cardsPlayedInTurn){
+			var score = 0;
+
+			_.each(cardsPlayedInTurn, function(cardPlayedInTurn){
+				return score += cardPlayedInTurn[2].points;
+			});
+			return score;
 		}
 
 		function getPlayers(deck){

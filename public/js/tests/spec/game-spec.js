@@ -1,7 +1,7 @@
 define([	
 	'underscore'
 , 'cardProperties'
-,	'../../models/card'
+,	'card'
 ,	'../../collections/hand'
 ,	'../../collections/deck'
 ,	'../../game'
@@ -140,6 +140,31 @@ define([
         expect(game.players[0].winnerOfLastRound).toBe(false);
         expect(game.players[1].winnerOfLastRound).toBe(true);
         expect(game.players[2].winnerOfLastRound).toBe(false);
+      });
+      it("should add to the winning players score the total points during the turn", function(){
+        var game = new Game()
+        ,   fiveOfHearts
+        ,   queenOfSpades
+        ,   twoOfDiamonds
+        ,   fourOfHearts;
+
+        _.each(game.players, function(player){ player.swapPhaseCompleted = true; });
+        game.turn = 2;
+
+        fiveOfHearts = new Card({suit: CardProperties.suit.hearts, rank: CardProperties.rank.five });
+        queenOfSpades = new Card({suit: CardProperties.suit.spades, rank: CardProperties.rank.queen });
+        twoOfDiamonds = new Card({suit: CardProperties.suit.diamonds, rank: CardProperties.rank.two });
+        fourOfHearts = new Card({suit: CardProperties.suit.hearts, rank: CardProperties.rank.four });
+
+        game.processPlayersGo(game.players[0], fiveOfHearts);
+        game.processPlayersGo(game.players[1], queenOfSpades);
+        game.processPlayersGo(game.players[2], twoOfDiamonds);
+        game.processPlayersGo(game.players[3], fourOfHearts);
+        
+        expect(game.players[0].score).toEqual(15);
+        expect(game.players[1].score).toEqual(0);
+        expect(game.players[2].score).toEqual(0);
+        expect(game.players[3].score).toEqual(0);
       });
   	})
   }
