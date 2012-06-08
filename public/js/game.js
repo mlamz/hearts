@@ -37,7 +37,8 @@ define([
 		Game.prototype.processPlayersGo = function(player, card){
 			var twoOfClubs
 			, 	cardsPlayedInTurn
-			,	winningPlayer;
+			,	winningPlayer
+			,	shotTheMoon;
 
 			twoOfClubs = new Card({suit: CardProperties.suit.clubs, rank: CardProperties.rank.two});
 
@@ -46,13 +47,36 @@ define([
 			}
 
 			this.record.push([this.turn, player, card]);
-			if(this.record.length % 4 === 0 && this.record.length > 0){
-				cardsPlayedInTurn = this.record.slice(this.record.length - 4);
+			if (haveAllPlayersPlayedTheirGo(this.record)){
+				calculateScores(this.record, this.players);
+			}
+		}
 
-				_.each(this.players, function(player) { return player.winnerOfLastRound = false; });
+		function haveAllPlayersPlayedTheirGo(record){
+			return record.length % 4 === 0 && record.length > 0;
+		}
+
+		function calculateScores(record, players){
+			cardsPlayedInTurn = record.slice(record.length - 4);
+
+				_.each(players, function(player) { player.winnerOfLastRound = false; });
 				winningPlayer = determineWinnerOfTurn(cardsPlayedInTurn);
 				winningPlayer.score += determineScoreOfTurn(cardsPlayedInTurn);
-			}
+
+				shotTheMoon = hasWinningPlayerShotTheMoon(winningPlayer);
+
+				if(shotTheMoon){
+					winningPlayer.score = 0;
+					_.each(players, function(player){
+						if (player.winnerOfLastRound === false){
+							player.score = 26;
+						}
+					});
+				}
+		}
+
+		function hasWinningPlayerShotTheMoon(player){
+			return player.score === 26;
 		}
 
 		function determineWinnerOfTurn(cardsPlayedInTurn){
