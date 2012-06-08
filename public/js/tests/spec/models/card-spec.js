@@ -1,4 +1,4 @@
-define(['card-properties','card'], 
+define(['cardProperties','card'], 
   function(CardProperties, Card) {
     describe("Card", function() {
 
