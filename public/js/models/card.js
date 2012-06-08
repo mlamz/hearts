@@ -2,10 +2,12 @@ define(['backbone'],
 	function(Backbone) {
     	var Card = Backbone.Model.extend({
     		initialize: function(){
+                this.rank = this.get('rank');
+                this.suit = this.get('suit');
     		}
     	});
     	Card.prototype.equals = function(otherCard){
-    		if (this.get('suit') === otherCard.get('suit') && this.get('rank') === otherCard.get('rank')){
+    		if (this.suit === otherCard.suit && this.rank === otherCard.rank){
     			return true;
     		};
 

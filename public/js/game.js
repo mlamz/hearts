@@ -51,7 +51,7 @@ define([
 		function determineWinnerOfTurn(record){
 			var cardsPlayedInTurn, winningPlayerGo;
 			cardsPlayedInTurn = record.slice(record.length - 4);
-			cardsPlayedInTurn = _.sortBy(cardsPlayedInTurn, function(playerGo){ return playerGo[2].get('rank'); });
+			cardsPlayedInTurn = _.sortBy(cardsPlayedInTurn, function(playerGo){ return playerGo[2].rank; });
 			winningPlayerGo = _.last(cardsPlayedInTurn);
 			winningPlayerGo[1].winnerOfLastRound = true;
 		}
