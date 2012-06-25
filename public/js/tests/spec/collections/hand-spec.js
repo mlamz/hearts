@@ -45,6 +45,40 @@ define([
 
 
 		});
+
+		it("should order the cards by suit", function(){
+			var hand = new Hand(new Deck())
+			,	indexOfFirstClub
+			,	indexOfFirstDiamond
+			,	indexOfFirstSpade
+			,	indexOfFirstHeart
+			,	i
+			;
+
+			for(i = 0;i<13;i++){
+				if(hand.models[i].suit === 0 && !indexOfFirstClub){
+					indexOfFirstClub = i;
+				}
+				else if(hand.models[i].suit === 1 && !indexOfFirstDiamond){
+					indexOfFirstDiamond = i;
+				}
+				else if(hand.models[i].suit === 2 && !indexOfFirstSpade){
+					indexOfFirstSpade = i;
+				}
+				else if(hand.models[i].suit === 3 && !indexOfFirstHeart){
+					indexOfFirstHeart = i;
+				}
+			}
+			if (indexOfFirstClub && indexOfFirstDiamond){
+				expect(indexOfFirstClub).toBeLessThan(indexOfFirstDiamond);
+			}
+			if (indexOfFirstDiamond && indexOfFirstSpade){
+				expect(indexOfFirstDiamond).toBeLessThan(indexOfFirstSpade);
+			}
+			if (indexOfFirstSpade && indexOfFirstHeart){
+				expect(indexOfFirstSpade).toBeLessThan(indexOfFirstHeart);
+			}
+		});
     });
 
     function getCardConfigurations(){

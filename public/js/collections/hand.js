@@ -1,5 +1,5 @@
-define(['backbone', 'card'], 
-	function(Backbone,  Card) {
+define(['underscore', 'backbone', 'card'], 
+	function(_, Backbone,  Card) {
     	var Hand = Backbone.Collection.extend({
     		model: Card,
     		initialize: function(deck){
@@ -12,7 +12,13 @@ define(['backbone', 'card'],
                     var card = takeCardFromDeck(deck);
                     this.add(card);
                 }
-    		}
+                this.reOrder();
+    		},
+            reOrder: function(){
+                this.models = _.sortBy(this.models, function(card){
+                    return ((20 * (card.suit)) + card.rank);
+                });
+            }
     	});
 
         function takeCardFromDeck(deck){
