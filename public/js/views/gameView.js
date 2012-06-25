@@ -6,6 +6,8 @@ define(['jquery', 'underscore', 'backbone','game'],
 					el: $("#game"),
 					initialize: function(){
 						console.log("initialising game");
+						var game = new Game();
+						console.dir(game);
 					},
 					render: function(){
 
