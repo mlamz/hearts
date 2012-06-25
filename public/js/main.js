@@ -9,7 +9,8 @@ require.config({
         hand: 			'collections/hand', 
         gameError: 		'errors/game-error', 
         cardProperties: 'models/card-properties', 
-        playerView: 	'views/playerView', 
+        playerView:     'views/playerView', 
+        messageView: 	'views/messageView', 
     }
 
 });

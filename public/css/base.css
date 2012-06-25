@@ -5,3 +5,10 @@ div.card{
 .clear{
 	clear: both;
 }
+
+#messages{
+	width: 800px;
+	height: 20px;
+	border: solid 1px black;
+	padding: 5px;
+}

@@ -1,5 +1,5 @@
-define(['jquery', 'underscore', 'backbone','game', 'playerView'], 
-	function($, _, Backbone, Game, PlayerView) {
+define(['jquery', 'underscore', 'backbone','game', 'playerView', 'messageView'], 
+	function($, _, Backbone, Game, PlayerView, MessageView) {
 		return {
 			initialize: function(){
 				var GameView = Backbone.View.extend({
@@ -20,6 +20,8 @@ define(['jquery', 'underscore', 'backbone','game', 'playerView'],
 						player2View = new PlayerView(game.players[1]);
 						player3View = new PlayerView(game.players[2]);
 						player4View = new PlayerView(game.players[3]);
+
+						new MessageView();
 					},
 					render: function(){
 					},
