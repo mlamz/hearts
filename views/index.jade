@@ -1,6 +1,7 @@
 h1 hearts
 
 div#game
+	div#messages
 	div#player-1
 	div#player-2
 	div#player-3
@@ -10,31 +11,31 @@ script(type='text/html',id='template-player')
 	span <%= name %>
 
 	div.deck
-		div.card
+		div.card(data-suit!='<%= hand[0].suit %>',data-rank!='<%= hand[0].rank %>',data-playerNumber!='<%= playerNumber %>')
 			img(src!='/images/cards/<%= hand[0].suit %>-<%= hand[0].rank %>.png')
-		div.card
+		div.card(data-suit!='<%= hand[1].suit %>',data-rank!='<%= hand[1].rank %>',data-playerNumber!='<%= playerNumber %>')
 			img(src!='/images/cards/<%= hand[1].suit %>-<%= hand[1].rank %>.png')
-		div.card
+		div.card(data-suit!='<%= hand[2].suit %>',data-rank!='<%= hand[2].rank %>',data-playerNumber!='<%= playerNumber %>')
 			img(src!='/images/cards/<%= hand[2].suit %>-<%= hand[2].rank %>.png')
-		div.card
+		div.card(data-suit!='<%= hand[3].suit %>',data-rank!='<%= hand[3].rank %>',data-playerNumber!='<%= playerNumber %>')
 			img(src!='/images/cards/<%= hand[3].suit %>-<%= hand[3].rank %>.png')
-		div.card
+		div.card(data-suit!='<%= hand[4].suit %>',data-rank!='<%= hand[4].rank %>',data-playerNumber!='<%= playerNumber %>')
 			img(src!='/images/cards/<%= hand[4].suit %>-<%= hand[4].rank %>.png')
-		div.card
+		div.card(data-suit!='<%= hand[5].suit %>',data-rank!='<%= hand[5].rank %>',data-playerNumber!='<%= playerNumber %>')
 			img(src!='/images/cards/<%= hand[5].suit %>-<%= hand[5].rank %>.png')
-		div.card
+		div.card(data-suit!='<%= hand[6].suit %>',data-rank!='<%= hand[6].rank %>',data-playerNumber!='<%= playerNumber %>')
 			img(src!='/images/cards/<%= hand[6].suit %>-<%= hand[6].rank %>.png')
-		div.card
+		div.card(data-suit!='<%= hand[7].suit %>',data-rank!='<%= hand[7].rank %>',data-playerNumber!='<%= playerNumber %>')
 			img(src!='/images/cards/<%= hand[7].suit %>-<%= hand[7].rank %>.png')
-		div.card
+		div.card(data-suit!='<%= hand[8].suit %>',data-rank!='<%= hand[8].rank %>',data-playerNumber!='<%= playerNumber %>')
 			img(src!='/images/cards/<%= hand[8].suit %>-<%= hand[8].rank %>.png')
-		div.card
+		div.card(data-suit!='<%= hand[9].suit %>',data-rank!='<%= hand[9].rank %>',data-playerNumber!='<%= playerNumber %>')
 			img(src!='/images/cards/<%= hand[9].suit %>-<%= hand[9].rank %>.png')
-		div.card
+		div.card(data-suit!='<%= hand[10].suit %>',data-rank!='<%= hand[10].rank %>',data-playerNumber!='<%= playerNumber %>')
 			img(src!='/images/cards/<%= hand[10].suit %>-<%= hand[10].rank %>.png')
-		div.card
+		div.card(data-suit!='<%= hand[11].suit %>',data-rank!='<%= hand[11].rank %>',data-playerNumber!='<%= playerNumber %>')
 			img(src!='/images/cards/<%= hand[11].suit %>-<%= hand[11].rank %>.png')
-		div.card
+		div.card(data-suit!='<%= hand[12].suit %>',data-rank!='<%= hand[12].rank %>',data-playerNumber!='<%= playerNumber %>')
 			img(src!='/images/cards/<%= hand[12].suit %>-<%= hand[12].rank %>.png')
 		div.clear
 		

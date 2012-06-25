@@ -22,7 +22,14 @@ define(['jquery', 'underscore', 'backbone','game', 'playerView'],
 						player4View = new PlayerView(game.players[3]);
 					},
 					render: function(){
-
+					},
+					events: {
+						"click .card": "processGo"
+					},
+					processGo: function(e){
+						console.log('suit: ' + $(e.currentTarget).data('suit'));
+						console.log('rank: ' + $(e.currentTarget).data('rank'));
+						console.log('playerNumber: ' + $(e.currentTarget).data('playernumber'));
 					}
 				});
 

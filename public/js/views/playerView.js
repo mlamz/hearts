@@ -9,12 +9,15 @@ define(['jquery', 'underscore', 'backbone','player'],
 				console.log(player.name + " initialized");
 				console.log(player.hand.models);
 				this.el = $('#player-' + this.player.number);
-				//this.el.find('img').addAttr('src', "httpp.....")
 				this.render();
 			
 			},
 			render: function(){
-				var html = this.template({ name: this.player.name, hand: this.player.hand.models });
+				var html = this.template({ 
+					name: this.player.name, 
+					hand: this.player.hand.models, 
+					playerNumber: this.player.number 
+				});
     			$(this.el).append(html);
 			}
 		});
