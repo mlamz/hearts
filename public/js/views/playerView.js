@@ -6,12 +6,13 @@ define(['jquery', 'underscore', 'backbone','player'],
 			initialize: function(player){
 				this.player = player;
 				console.log(player.name + " initialized");
+				console.log(player.hand.models);
 				this.el = $('#player-' + this.player.number);
 				this.render();
 			
 			},
 			render: function(){
-				var html = this.template({ name: this.player.name });
+				var html = this.template({ name: this.player.name, hand: this.player.hand.models });
     			$(this.el).append(html);
 			}
 		});
