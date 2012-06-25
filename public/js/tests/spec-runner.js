@@ -5,6 +5,7 @@ define([
 ,	'spec/collections/deck-spec'
 ,	'spec/game-spec'
 ,	'spec/player-spec'
+,	'spec/views/gameview-spec'
 	], 
 	function(	cardPropertiesSpec
 		, 		cardSpec
@@ -12,6 +13,7 @@ define([
 		,		deckSpec
 		,		gameSpec
 		,		playerSpec
+		,		gameviewSpec
 		) {
 		return {
 			initialize: function(){
