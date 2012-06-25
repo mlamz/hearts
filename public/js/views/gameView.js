@@ -4,6 +4,7 @@ define(['jquery', 'underscore', 'backbone','game', 'playerView', 'messageView'],
 			initialize: function(){
 				var GameView = Backbone.View.extend({
 					el: $("#game"),
+					chosenCardsToSwap: 0,
 					initialize: function(){
 						var game
 						,	player1View
@@ -12,14 +13,14 @@ define(['jquery', 'underscore', 'backbone','game', 'playerView', 'messageView'],
 						,	player4View
 						;
 
-						game = new Game();
+						this.game = new Game();
 
-						console.dir(game);
+						console.dir(this.game);
 
-						player1View = new PlayerView(game.players[0]);
-						player2View = new PlayerView(game.players[1]);
-						player3View = new PlayerView(game.players[2]);
-						player4View = new PlayerView(game.players[3]);
+						player1View = new PlayerView(this.game.players[0]);
+						player2View = new PlayerView(this.game.players[1]);
+						player3View = new PlayerView(this.game.players[2]);
+						player4View = new PlayerView(this.game.players[3]);
 
 						new MessageView();
 					},
@@ -29,9 +30,30 @@ define(['jquery', 'underscore', 'backbone','game', 'playerView', 'messageView'],
 						"click .card": "processGo"
 					},
 					processGo: function(e){
-						console.log('suit: ' + $(e.currentTarget).data('suit'));
-						console.log('rank: ' + $(e.currentTarget).data('rank'));
-						console.log('playerNumber: ' + $(e.currentTarget).data('playernumber'));
+						var card 	= 	$(e.currentTarget)
+						,	offset 	=  	card.offset()
+						;
+
+						if (this.game.turn === 0){
+							if (card.attr('data-chosen') != 'true'){
+								this.chosenCardsToSwap++;
+								card.attr('data-chosen', 'true');
+								card.offset({top: offset.top - 10, left: offset.left});
+							} else {
+								this.chosenCardsToSwap--;
+								card.attr('data-chosen', 'false');
+								card.offset({top: offset.top + 10, left: offset.left});
+							}
+
+							console.log('suit: ' + card.data('suit'));
+							console.log('rank: ' + card.data('rank'));
+							console.log('playerNumber: ' + card.data('playernumber'));
+
+							console.log('turn number', this.game.turn);
+							var offset =  card.offset();
+							console.log("offset", offset);
+							
+						}
 					}
 				});
 
