@@ -22,12 +22,13 @@ define(['jquery', 'underscore', 'backbone','game', 'playerView', 'messageView'],
 						player3View = new PlayerView(this.game.players[2]);
 						player4View = new PlayerView(this.game.players[3]);
 
-						new MessageView();
+						this.messages = new MessageView();
 					},
 					render: function(){
 					},
 					events: {
-						"click .card": "processGo"
+						"click .card": "processGo",
+						"click #swap": "swap"
 					},
 					processGo: function(e){
 						var card 	= 	$(e.currentTarget)
@@ -54,6 +55,19 @@ define(['jquery', 'underscore', 'backbone','game', 'playerView', 'messageView'],
 							console.log("offset", offset);
 							
 						}
+					},
+					swap: function(){
+						var cardsToSwap;
+
+						cardsToSwap = $('.card[data-chosen="true"]');
+
+						if (cardsToSwap.length !== 3){
+							this.messages.write("Please make sure that the number of cards to swap is 3");
+							return;
+						}
+						console.log("swapping the following cards", cardsToSwap);
+
+
 					}
 				});
 

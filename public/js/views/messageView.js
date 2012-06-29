@@ -5,6 +5,9 @@ define(['jquery', 'underscore', 'backbone'],
 			el:$('#messages'),
 			initialize: function(){
 				this.el.append("Swap phase. Please choose three cards to swap to the left.");
+			},
+			write: function(text){
+				this.el.text(text);
 			}
 		});
 
